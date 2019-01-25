@@ -80,6 +80,6 @@ typings/
 .dynamodb/
 
 # for the project
-/public
-!/public/assets/media/
-!/public/assets/vendor/
+/public/assets/css
+/public/assets/js
+/public/**/*.html
