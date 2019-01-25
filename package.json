@@ -1,0 +1,79 @@
+{
+  "name": "static-site-template",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "run-p serve watch:*",
+    "build": "run-s clean build:*",
+    "build:ejs": "ejs-cli --base-dir src/ejs/ '/**/**.ejs' --out ./public/ --options site-config.json",
+    "build:webpack": "NODE_ENV=production webpack",
+    "watch:ejs": "nodemon -e ejs -x \"yarn build:ejs \"",
+    "watch:webpack": "webpack -w",
+    "clean": "del ./public/**/*.html ./public/assets/css ./public/assets/js",
+    "serve": "browser-sync start --server ./public/ --files='./public/**/*.html, ./public/assets/**/*'"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.1",
+    "@babel/polyfill": "^7.2.5",
+    "@babel/preset-env": "^7.3.1",
+    "autoprefixer": "^9.4.6",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-module-resolver": "^3.1.3",
+    "browser-sync": "^2.26.3",
+    "css-loader": "^2.1.0",
+    "css-mqpacker": "^7.0.0",
+    "cssnano": "^4.1.8",
+    "del-cli": "^1.1.0",
+    "ejs-cli": "^2.0.1",
+    "eslint": "^5.12.1",
+    "eslint-config-prettier": "^3.6.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "mini-css-extract-plugin": "^0.5.0",
+    "node-sass": "^4.11.0",
+    "node-sass-glob-importer": "^5.3.0",
+    "nodemon": "^1.18.9",
+    "npm-run-all": "^4.1.5",
+    "postcss-loader": "^3.0.0",
+    "prettier": "^1.16.1",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1"
+  },
+  "babel": {
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-proposal-object-rest-spread",
+      [
+        "module-resolver",
+        {
+          "root": [
+            "./frontend/js"
+          ],
+          "alias": {
+            "~": "./frontend/js"
+          }
+        }
+      ]
+    ],
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "browsers": [
+              "last 2 versions",
+              "Explorer 11"
+            ]
+          },
+          "useBuiltIns": "usage"
+        }
+      ]
+    ]
+  },
+  "dependencies": {}
+}
